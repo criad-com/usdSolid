@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: MIT
+[project]
+name = "usdsolid-kit"
+version = "0.1.4"
+description = "Source checks for the native UsdSolid packages"
+requires-python = ">=3.11"
+license = "MIT"
+
+[tool.pytest.ini_options]
+testpaths = ["testenv"]
+python_files = ["test_*.py"]

@@ -1,0 +1,416 @@
+{
+  "breps": 50,
+  "error_free": 35,
+  "fixtures": [
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "derivedTrims/testConeNoPcurves.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "derivedTrims/testCubeNoPcurves.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "derivedTrims/testCubeWithHoleNoPcurves.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "derivedTrims/testCylinderNoPcurves.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "derivedTrims/testDepressedPlaneNoPcurves.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "derivedTrims/testFilletedCubeNoPcurves.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "derivedTrims/testPlaneWithHoleNoPcurves.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "derivedTrims/testSphereNoPcurves.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testAnalyticCone.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testAnalyticConeEdges.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testAnalyticCylinder.usda",
+      "findings": [
+        {
+          "codes": [
+            "BA.761"
+          ],
+          "count": 1,
+          "identifier": "usdSolidValidators:BrepArrayUvTrim.FullPeriodFaceNoSeamEdgeuse",
+          "severity": "warning"
+        }
+      ],
+      "warnings": 1
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testAnalyticCylinderEdges.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testAnalyticPlane.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testAnalyticPlaneWithHole.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testAnalyticSphere.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testAnalyticTorus.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 1,
+      "errors": 2,
+      "file": "testCone.usda",
+      "findings": [
+        {
+          "codes": [
+            "BA.763"
+          ],
+          "count": 2,
+          "identifier": "usdSolidValidators:BrepArrayUvTrim.UvLoopNotClosed",
+          "severity": "error"
+        }
+      ],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testCube.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 1,
+      "errors": 6,
+      "file": "testCubeBrep.usda",
+      "findings": [
+        {
+          "codes": [
+            "BA.070"
+          ],
+          "count": 2,
+          "identifier": "usdSolidValidators:BrepArrayAuthorship.AttributeNotAuthored",
+          "severity": "error"
+        },
+        {
+          "codes": [
+            "BA.085"
+          ],
+          "count": 3,
+          "identifier": "usdSolidValidators:BrepArrayAuthorship.AttributeNotAuthored",
+          "severity": "error"
+        },
+        {
+          "codes": [
+            "BA.005"
+          ],
+          "count": 1,
+          "identifier": "usdSolidValidators:BrepArrayStructure.MissingBrepAttributes",
+          "severity": "error"
+        }
+      ],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testCubeWithHole.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testCylinder.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testDepressedPlane.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testDepressedPlaneSeamSplit.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 1,
+      "errors": 8,
+      "file": "testFilletedCube.usda",
+      "findings": [
+        {
+          "codes": [
+            "BA.763"
+          ],
+          "count": 8,
+          "identifier": "usdSolidValidators:BrepArrayUvTrim.UvLoopNotClosed",
+          "severity": "error"
+        }
+      ],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 1,
+      "errors": 8,
+      "file": "testFilletedCubeWithHole.usda",
+      "findings": [
+        {
+          "codes": [
+            "BA.763"
+          ],
+          "count": 8,
+          "identifier": "usdSolidValidators:BrepArrayUvTrim.UvLoopNotClosed",
+          "severity": "error"
+        }
+      ],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testFullPeriodSphereBand.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testFullPeriodSphereBandSeamSplit.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testFullPeriodTorus.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testFullPeriodTorusSeamSplit.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testFullSphere.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testMixedCurvesWithPcurves.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testMixedSurfaces.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testPlane.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testPlaneWithHole.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testProducerCube.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testRealToleranceCylinder.usda",
+      "findings": [
+        {
+          "codes": [
+            "BA.761"
+          ],
+          "count": 2,
+          "identifier": "usdSolidValidators:BrepArrayUvTrim.FullPeriodFaceNoSeamEdgeuse",
+          "severity": "warning"
+        }
+      ],
+      "warnings": 2
+    },
+    {
+      "breps": 1,
+      "cli_exit": 1,
+      "errors": 4,
+      "file": "testSphere.usda",
+      "findings": [
+        {
+          "codes": [
+            "BA.763"
+          ],
+          "count": 4,
+          "identifier": "usdSolidValidators:BrepArrayUvTrim.UvLoopNotClosed",
+          "severity": "error"
+        }
+      ],
+      "warnings": 0
+    },
+    {
+      "breps": 11,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testToolbox.usda",
+      "findings": [
+        {
+          "codes": [
+            "BA.761"
+          ],
+          "count": 2,
+          "identifier": "usdSolidValidators:BrepArrayUvTrim.FullPeriodFaceNoSeamEdgeuse",
+          "severity": "warning"
+        }
+      ],
+      "warnings": 2
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testTwoBoxes.usda",
+      "findings": [],
+      "warnings": 0
+    },
+    {
+      "breps": 1,
+      "cli_exit": 0,
+      "errors": 0,
+      "file": "testVoidOnlySphere.usda",
+      "findings": [],
+      "warnings": 0
+    }
+  ],
+  "stages": 40,
+  "with_errors": 5
+}

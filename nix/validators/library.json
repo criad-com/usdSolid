@@ -1,0 +1,8 @@
+{
+  "name": "usdSolidValidators",
+  "version": "0.1.4",
+  "licence": "MIT",
+  "kind": "kit",
+  "tier": "toolchain",
+  "requires": {"usdSolid": ">=0.1,<0.2"}
+}

@@ -1,0 +1,12 @@
+#usda 1.0
+# SPDX-License-Identifier: MIT
+(
+    defaultPrim = "Body"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+def BrepArray "Body"
+{
+    uniform double[] brep:intersectTol3d = [0.000001]
+    uniform uint[] brep:regionCount = [2]
+}

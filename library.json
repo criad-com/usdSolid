@@ -1,0 +1,8 @@
+{
+  "name": "usdSolid",
+  "version": "0.1.4",
+  "licence": "MIT",
+  "kind": "kit",
+  "tier": "toolchain",
+  "requires": {}
+}
