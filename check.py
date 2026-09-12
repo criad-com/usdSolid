@@ -34,7 +34,7 @@ def main():
     readme = (ROOT / "README.md").read_text()
     report.check("KitReadme", re.findall(r"(?m)^## (.+)$", readme) == HEADINGS)
     manifest = json.loads((ROOT / "library.json").read_text())
-    report.check("KitManifest", manifest == {"name": "usdSolid", "version": "0.1.5", "licence": "MIT",
+    report.check("KitManifest", manifest == {"name": "usdSolid", "version": "0.1.6", "licence": "MIT",
                  "kind": "kit", "tier": "toolchain", "requires": {}})
     dependencies = json.loads((ROOT / "dependencies.json").read_text())
     report.run("KitFlakeS05", check_pins, dependencies,

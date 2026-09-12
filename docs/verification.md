@@ -1,6 +1,47 @@
 # Verification record
 
-## v0.1.5 public re-pin
+## v0.1.6 documentation patch
+
+The release docs state the measured acceptance and publication results
+directly. Release metadata is 0.1.6 in both manifests, both CMake projects,
+pyproject.toml and the gate; dependency pins and requirement ranges are unchanged.
+
+| Acceptance | Result |
+|---|---|
+| Source pytest | 16 passed |
+| Shared structure lint | 4 checks, 0 failed: S01, S04, S25, S26 from v0.3.10 |
+| Documentation reference sweep | 0 references to the removed branch-only status file in tracked files |
+| Whitespace | `git diff --check` clean |
+| Native rebuild / `nix flake check` | Not run for this documentation patch; v0.1.6 native acceptance is not proven |
+| Cache receipt | Published v0.1.5 receipt retained byte-for-byte; 78 closure paths, 3 verified artifacts |
+
+### Deviations
+
+Native v0.1.6 acceptance and a regenerated receipt remain for the reviewer.
+The existing runtime was checked once against the unmodified v0.1.5 source
+before the version bump, with the results below.
+
+## v0.1.5 publication
+
+The committed [cache receipt](cache-receipt.json) records a successful
+v0.1.5 publication: push exit code 0, 78 closure paths and three verified
+artifacts (schema, validators and runtime). The recorded input revisions
+match `dependencies.json`.
+
+The published runtime passes **29 checks, 0 failed, 0 not run**, including
+13 classes, 20 validators, 17 upstream Python tests and the native validator
+executable. Plugin-free composition passes, and the two seeded BA codes
+are independently rejected. All 40 fixture stages / 50 Breps match the
+expected findings: 35 error-free stages, five with errors, 28 errors and
+five warnings; the CLI agrees for all 40 stages.
+
+These release results supersede the initial attempt below, which used
+stale v0.1.4 artifacts. They do not establish v0.1.6 native acceptance.
+
+## v0.1.5 initial public re-pin checks
+
+This section records the source checks and unsuccessful offline attempt
+before the v0.1.5 publication above.
 
 Both family release tags were checked directly on the forge and public
 GitHub repositories. Annotated forge tags were peeled to their commits.
@@ -50,10 +91,10 @@ flake-check attempt was made.
 
 ### Deviations
 
-- The required green native gate, rebuild, cache publication and regenerated
-  receipt cannot be supplied within the available build environment. See
-  [the blocker and remaining work](../BLOCKED.md). The old receipt is not
-  relabelled with requested pins or a new release version.
+- The initial environment could not supply a native rebuild, green gate,
+  cache publication or regenerated receipt. The later v0.1.5 publication
+  records 78 closure paths and three verified artifacts, and the published
+  runtime now passes all 29 gate checks as recorded above.
 - A provenance-only native result diff is **not proven**. All three upstream
   pins and the committed fixture data are unchanged. The toolchain's v0.3.10
   changelog states that the OpenUSD output is unchanged; its native CMake/Nix
@@ -70,11 +111,9 @@ flake-check attempt was made.
 
 ## Historical v0.1.4 publication
 
-The committed receipt records a successful native publication for v0.1.4,
-including 78 closure paths and three artifact hashes. Its runtime was used
-for the regression measurements above. That receipt supersedes older prose
-which described v0.1.4 publication as pending; it does not establish a green
-v0.1.5 gate.
+The v0.1.4 publication recorded 78 closure paths and three artifact hashes.
+Its runtime was used for the initial re-pin regression measurements above.
+The committed receipt now records v0.1.5 publication instead.
 
 The existing limitations remain: five P2 examples and the separate
 66-defect producer corpus are absent from the pinned sources, and upstream

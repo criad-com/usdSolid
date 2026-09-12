@@ -57,7 +57,8 @@ nix flake check --offline --no-write-lock-file \
 ```
 
 Offline source resolution still requires cached transitive inputs and build
-dependencies. See [the current build blocker](BLOCKED.md).
+dependencies. The v0.1.5 release receipt records 78 published closure paths
+and three verified artifacts; its existing runtime passes all 29 gate checks.
 
 `dependencies.json` records the checked forge commits as `revision` and the
 independent public release commits as `publicRevision`. Native provenance
@@ -100,29 +101,27 @@ Linux uses `.so` libraries.
 
 ## Status
 
-Version **0.1.5** pins the two published toolchain tags above. Both tags
-were verified on GitHub and the forge; the three external OpenUSD source
-pins and all requirement ranges are unchanged.
+Version **0.1.6** updates the release documentation and retains the two
+published toolchain tags above. Both tags were verified on GitHub and the
+forge; the three external OpenUSD source pins and all requirement ranges
+are unchanged.
 
 Source pytest has **16 passing tests**. Shared structure rules S01, S04,
 S25 and S26 pass with toolchain v0.3.10; the kit's S05 equivalent checks
 family release tags and flake version agreement while retaining the
 external fork URLs.
 
-Native v0.1.5 acceptance is **not proven**: required build dependencies are
-unavailable within the permitted build environment. The single offline
-flake-check attempt evaluated the native outputs and failed on an uncached
-source with local builds disabled. The gate against the existing v0.1.4
-runtime reports **29 checks, 3 failed**: the changed build revisions and
-both installed plugin versions. Its other 26 checks pass, including
-13 classes, 20 validators, 17 upstream Python tests, the native validator
-test, plugin-free composition and the unchanged **40-stage / 50-Brep**
-fixture findings. These are v0.1.4 regression measurements.
+The published v0.1.5 runtime passes **29 checks, 0 failed, 0 not run**,
+including 13 classes, 20 validators, 17 upstream Python tests, the native
+validator test, plugin-free composition and the **40-stage / 50-Brep**
+fixture findings. The [cache receipt](docs/cache-receipt.json) records its
+successful publication: 78 closure paths and three verified artifact hashes.
+These results supersede the initial v0.1.5 attempt using stale v0.1.4 artifacts.
 
-The [cache receipt](docs/cache-receipt.json) remains byte-identical evidence
-for v0.1.4: 78 closure paths and three verified artifact hashes. No v0.1.5
-native artifacts have been published. See [the verification record](docs/verification.md)
-and [remaining build work](BLOCKED.md).
+The v0.1.6 patch has source validation only; its native acceptance is
+**not proven** until the reviewer rebuilds and regenerates the receipt.
+See [the verification record](docs/verification.md) for the release evidence
+and historical gate results.
 
 The five P2 examples and 66 producer defect fixtures remain absent from the
 pins and not proven. See [the measured deviations](docs/upstream.md#fixture-availability).

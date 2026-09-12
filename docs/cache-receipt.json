@@ -1,5 +1,5 @@
 {
-  "version": "0.1.5",
+  "version": "0.1.6",
   "revisions": {
     "aeco-toolchain": "71c86d54aa1e4be180a301a089d9a40e727758cb",
     "upstream": "1f6d6d31f1cbeed452b4e1c312bf974d0519d71d",
@@ -13,18 +13,18 @@
   "verification": "Recursive push succeeded; schema, validators and runtime cache StorePath and NarHash match the local build",
   "artifacts": {
     "schema": {
-      "store": "b9xrcfh9bznv0zbxki6yc8ghdvz7cqc8-usdSolid-0.1.5",
-      "narHash": "sha256:04xapva2yn14hky01i4y2m6pfh5myia9y92wcsc458xis3pj4bif",
+      "store": "dh3pjb3y1w595243z04nccf2lqm86b9i-usdSolid-0.1.6",
+      "narHash": "sha256:1rd3sbafxpbsfb3r95651laz1avf6j79rsah0hl6m1plkw94szc4",
       "narSize": 2610320
     },
     "validators": {
-      "store": "hi1x78czcbnjqjdlbf05ifxfl5wnrm8q-usdSolidValidators-0.1.5",
-      "narHash": "sha256:16mllyxhi1q54zhshxmgmh2id8nl6mgdabzcbmnzra8m5y1q7wsh",
+      "store": "yfv85drzgcdd5hiw82ci1fsy0my42fc1-usdSolidValidators-0.1.6",
+      "narHash": "sha256:1i5pdq6mc2qgc2wklp729k1i7h87x51qyznd45kcimfa9ac5rwd0",
       "narSize": 813616
     },
     "runtime": {
-      "store": "jvh8h178bqw5lamwz0bqfgpmllwz0l08-usdSolid-runtime",
-      "narHash": "sha256:11s1h4jp8kq8i1f5gz5vax1ffflv2jz4ly51c5f6swp5nhhknnq5",
+      "store": "71w15jrhhw38dip9vxwmlm9pal8hgaf0-usdSolid-runtime",
+      "narHash": "sha256:17r67rrhzzghkr2pl67v0six6f1jg6c30dh50p50kmqvkkchmy9v",
       "narSize": 1312
     }
   }

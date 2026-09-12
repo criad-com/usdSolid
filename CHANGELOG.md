@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.6
+
+- Replace dangling release-status links with the recorded gate and publication
+  results, including the v0.1.5 receipt's 78 closure paths and three artifacts.
+- Record the published v0.1.5 runtime's 29 passing gate checks; preserve the
+  initial re-pin measurements as historical evidence.
+- Verify 16 source tests and four shared structure rules. Native v0.1.6
+  acceptance and receipt regeneration remain for the reviewer.
+
 ## 0.1.5
 
 - public re-pin: aeco-toolchain v0.4.0; usdaeco-toolchain v0.3.10.
@@ -17,7 +26,7 @@
 
 - Re-pin usdaeco-toolchain to v0.3.9, which fixes the Nix package version used by `pythonMetadataCheckPhase`; all other dependency pins are unchanged.
 - Update the recorded toolchain revision and mark the cache receipt pending native rebuild and regeneration.
-- Verify source checks only; native acceptance remains pending and `BLOCKED.md` is retained.
+- Verify source checks only; native acceptance remained pending at this step.
 
 ## 0.1.3
 
