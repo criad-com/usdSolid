@@ -2,9 +2,9 @@
 {
   description = "Codeful UsdSolid schema and native validation plugins";
   inputs = {
-    aeco-toolchain.url = "github:criad-com/aeco-toolchain?ref=34a29f51a232ac77d5e9f55431e537c426724035";
-    usdaeco-toolchain.url = "github:criad-com/usdaeco-toolchain?ref=v0.3.9";
-    usdaeco-toolchain.inputs.aeco-toolchain.follows = "aeco-toolchain";
+    aeco-toolchain.url = "github:criad-com/aeco-toolchain?ref=v0.4.0";
+    usdaeco-toolchain.url = "github:criad-com/usdaeco-toolchain?ref=v0.3.10";
+    usdaeco-toolchain.flake = false;
     nixpkgs.follows = "aeco-toolchain/nixpkgs";
     upstream = {
       url = "github:jensjebens/OpenUSD?rev=1f6d6d31f1cbeed452b4e1c312bf974d0519d71d";
@@ -21,6 +21,12 @@
   };
   outputs = { self, nixpkgs, aeco-toolchain, usdaeco-toolchain, upstream, upstream-validators, upstream-fixtures }:
     let
+      # Import only the builders from the source pin, without resolving its test inputs.
+      builders = (import (usdaeco-toolchain + "/flake.nix")).outputs {
+        self = usdaeco-toolchain;
+        inherit nixpkgs aeco-toolchain;
+        core = null; # Used only by the toolchain's own checks.
+      };
       systems = [ "aarch64-darwin" "x86_64-linux" ];
       eachSystem = nixpkgs.lib.genAttrs systems;
       forSystem = system:
@@ -28,7 +34,7 @@
           pkgs = nixpkgs.legacyPackages.${system};
           inherit (pkgs) lib;
           name = import ./nix/library-name.nix;
-          kit = usdaeco-toolchain.lib.forSystem system;
+          kit = builders.lib.forSystem system;
           usd-dev = aeco-toolchain.packages.${system}.usd-dev;
           compatInstall = plugin: ''
             mkdir -p "$out/lib/usd/${plugin}/resources"
@@ -40,7 +46,7 @@
             fileset = lib.fileset.unions [ ./library.json ./nix/schema
               ./tools/prepare_schema.py ./testenv/testRegistry.py ];
           };
-          usdSolid = (usdaeco-toolchain.lib.buildCodefulSchema {
+          usdSolid = (builders.lib.buildCodefulSchema {
             inherit system name;
             src = schemaSrc;
           }).overrideAttrs (old: {
@@ -71,7 +77,7 @@
             root = ./nix/validators;
             fileset = ./nix/validators;
           };
-          usdSolidValidators = (usdaeco-toolchain.lib.buildNativePlugin {
+          usdSolidValidators = (builders.lib.buildNativePlugin {
             inherit system;
             name = "usdSolidValidators";
             src = validatorSrc;

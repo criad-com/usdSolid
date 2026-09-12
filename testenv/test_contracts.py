@@ -2,9 +2,11 @@
 import json
 import pytest
 
-from check_support import ROOT, check_pins
+from check_support import ROOT, check_pins, check_built_revisions
 from prepare_schema import prepare
 from prepare_validators import prepare as prepare_validator
+
+VERSION = json.loads((ROOT / "library.json").read_text())["version"]
 
 
 @pytest.fixture
@@ -43,7 +45,7 @@ def test_missing_upstream_metadata_fails(schema, field):
 
 def test_dependency_pins_match_sources():
     assert check_pins(json.loads((ROOT / "dependencies.json").read_text()),
-                      (ROOT / "flake.nix").read_text())
+                      (ROOT / "flake.nix").read_text(), VERSION)
 
 
 @pytest.mark.parametrize("mutation", ["revision", "missing", "follows"])
@@ -57,7 +59,49 @@ def test_pin_drift_fails(mutation):
     else:
         flake = flake.replace('nixpkgs.follows', 'nixpkgs.other')
     with pytest.raises(AssertionError):
-        check_pins(pins, flake)
+        check_pins(pins, flake, VERSION)
+
+
+@pytest.mark.parametrize("name", ["aeco-toolchain", "usdaeco-toolchain"])
+def test_matching_family_hash_pins_fail(name):
+    pins = json.loads((ROOT / "dependencies.json").read_text())
+    flake = (ROOT / "flake.nix").read_text()
+    tag = pins["repos"][name]["ref"]
+    revision = pins["repos"][name]["revision"]
+    pins["repos"][name]["ref"] = revision
+    flake = flake.replace(f'{name}?ref={tag}', f'{name}?ref={revision}')
+    with pytest.raises(AssertionError, match="release tags"):
+        check_pins(pins, flake, VERSION)
+
+
+@pytest.mark.parametrize("mutation", ["version", "tag-as-revision", "recursive-toolchain"])
+def test_kit_flake_contract_rejects_drift(mutation):
+    pins = json.loads((ROOT / "dependencies.json").read_text())
+    flake = (ROOT / "flake.nix").read_text()
+    if mutation == "version":
+        flake += '\nversion = "0.0.0";\n'
+    elif mutation == "tag-as-revision":
+        flake = flake.replace('aeco-toolchain?ref=', 'aeco-toolchain?rev=')
+    else:
+        flake = flake.replace('usdaeco-toolchain.flake = false;', '')
+    with pytest.raises(AssertionError):
+        check_pins(pins, flake, VERSION)
+
+
+@pytest.mark.parametrize("public", [False, True])
+def test_checked_release_revisions_are_accepted(public):
+    pins = json.loads((ROOT / "dependencies.json").read_text())
+    revisions = {name: pin.get("publicRevision" if public else "revision", pin["ref"])
+                 for name, pin in pins["repos"].items()}
+    assert check_built_revisions({"revisions": revisions}, pins)
+
+
+def test_unchecked_build_revision_fails():
+    pins = json.loads((ROOT / "dependencies.json").read_text())
+    revisions = {name: pin.get("revision", pin["ref"]) for name, pin in pins["repos"].items()}
+    revisions["aeco-toolchain"] = "0" * 40
+    with pytest.raises(AssertionError, match="Build revision differs"):
+        check_built_revisions({"revisions": revisions}, pins)
 
 
 def test_descriptor_adaptation_preserves_rules(tmp_path):

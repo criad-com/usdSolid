@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
 cmake_minimum_required(VERSION 3.24)
-project(usdSolid VERSION 0.1.4 LANGUAGES CXX)
+project(usdSolid VERSION 0.1.5 LANGUAGES CXX)
 find_package(pxr CONFIG REQUIRED)
 include("${AECO_NATIVE_CMAKE}/AecoNative.cmake")
 aeco_codeful_schema(NAME ${PROJECT_NAME} PYTHON_MODULE UsdSolid)

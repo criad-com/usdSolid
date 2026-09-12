@@ -10,7 +10,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "tools"))
-from check_support import HEADINGS, check_pins, clean_env, run_native, runtime_paths
+from check_support import HEADINGS, check_pins, check_built_revisions, clean_env, run_native, runtime_paths
 
 
 def main():
@@ -27,20 +27,19 @@ def main():
 
     report = Report()
     print("== stage: repository contracts", flush=True)
-    # S02–S05 assume a semantic family repository; these explicit kit rows
-    # replace those four rules. Remaining schema/story rules do not apply.
-    for result in check_structure(ROOT, only=["S01", "S25", "S26"]):
+    # S02/S03 assume semantic repository names/headings. KitFlakeS05 keeps
+    # S05's tag/version rules while allowing the external OpenUSD fork URLs.
+    for result in check_structure(ROOT, only=["S01", "S04", "S25", "S26"]):
         report.add(result)
     readme = (ROOT / "README.md").read_text()
     report.check("KitReadme", re.findall(r"(?m)^## (.+)$", readme) == HEADINGS)
     manifest = json.loads((ROOT / "library.json").read_text())
-    report.check("KitManifest", manifest == {"name": "usdSolid", "version": "0.1.4", "licence": "MIT",
+    report.check("KitManifest", manifest == {"name": "usdSolid", "version": "0.1.5", "licence": "MIT",
                  "kind": "kit", "tier": "toolchain", "requires": {}})
     dependencies = json.loads((ROOT / "dependencies.json").read_text())
-    report.run("SourcePins", check_pins, dependencies,
-               (ROOT / "flake.nix").read_text())
-    report.check("BuiltRevisions", paths.get("revisions") ==
-                 {k: v.get("revision", v["ref"]) for k, v in dependencies["repos"].items()})
+    report.run("KitFlakeS05", check_pins, dependencies,
+               (ROOT / "flake.nix").read_text(), manifest["version"])
+    report.run("BuiltRevisions", check_built_revisions, paths, dependencies)
     report.check("NoVendoredSchema", not list(ROOT.glob("usdSolid/schema.usda")))
 
     print("== stage: installed artifacts", flush=True)

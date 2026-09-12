@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.5
+
+- public re-pin: aeco-toolchain v0.4.0; usdaeco-toolchain v0.3.10.
+- Import the native builders from the non-recursive toolchain source input;
+  remove the obsolete recursive core override. Requirement ranges are unchanged.
+- Record checked forge and public release revisions, accepting either exact
+  commit for build provenance because public releases have independent history.
+- Enforce release-tag family refs and flake version agreement in the kit pin
+  gate, retaining the external OpenUSD fork URLs; add shared S04 pin validation.
+- Verify 16 source tests and four shared structure rules. Native rebuild and
+  cache publication remain blocked by uncached build dependencies; retain
+  the v0.1.4 receipt unchanged and record the single offline flake attempt.
+
 ## 0.1.4
 
 - Re-pin usdaeco-toolchain to v0.3.9, which fixes the Nix package version used by `pythonMetadataCheckPhase`; all other dependency pins are unchanged.

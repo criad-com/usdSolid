@@ -6,15 +6,14 @@ from pathlib import Path
 import subprocess
 from urllib.request import urlopen
 
-from check_support import ROOT, runtime_paths
+from check_support import ROOT, check_built_revisions, runtime_paths
 
 
 if __name__ == "__main__":
     runtime = Path(os.environ.get("USD_SOLID_RUNTIME", ROOT / "result-runtime")).resolve()
     paths = runtime_paths()
-    pins = json.loads((ROOT / "dependencies.json").read_text())["repos"]
-    if paths["revisions"] != {key: pin.get("revision", pin["ref"]) for key, pin in pins.items()}:
-        raise RuntimeError("Build revisions do not match dependency pins")
+    dependencies = json.loads((ROOT / "dependencies.json").read_text())
+    check_built_revisions(paths, dependencies)
     for role, name, manifest in (("schema", "usdSolid", ROOT / "library.json"),
                                  ("validators", "usdSolidValidators", ROOT / "nix/validators/library.json")):
         plugin, = json.loads((Path(paths[role]) / "lib" / name / "resources/plugInfo.json").read_text())["Plugins"]

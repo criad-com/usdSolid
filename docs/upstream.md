@@ -68,10 +68,13 @@ is the authority for the upstream files.
 
 - Validators require their own branch pin because the schema branch does
   not contain the validator package.
-- The shared v0.3.9 structure lint recognizes semantic repositories, but
+- The shared v0.3.10 structure lint recognizes semantic repositories, but
   has no `kit` kind, platform README headings or non-family source URL
-  contract. The gate uses its applicable rules and explicit kit checks;
-  it does not claim an unmodified S01–S26 pass.
+  contract. The gate uses S01, S04, S25 and S26 plus explicit kit checks.
+  `KitFlakeS05` enforces matching release-tag family URLs, recorded revisions,
+  version literals matching library.json and a non-recursive builder input.
+  It preserves the external fork URLs that shared S05 assumes belong to the
+  family organization; it does not claim an unmodified S01–S29 pass.
 - Native Python bindings use the development OpenUSD Python ABI. The
   ordinary usd-core wheel is used only for plugin-free composition.
 - The shared builder's canonical resources are `lib/usdSolid/resources`.

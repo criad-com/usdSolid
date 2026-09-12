@@ -28,7 +28,10 @@ nix flake check --max-jobs 4 --cores 6
 ```
 
 Family inputs use the public [criad-com organization](https://github.com/criad-com)
-and have deployment overrides in the external `AECO_NIX_REGISTRY` JSON.
+with release-tag refs: **aeco-toolchain v0.4.0** and
+**usdaeco-toolchain v0.3.10**. The latter is a non-recursive source input;
+the flake imports its builders without resolving its own test fixtures.
+Deployment overrides live in the external `AECO_NIX_REGISTRY` JSON.
 For a checkout using that registry:
 
 ```sh
@@ -38,11 +41,28 @@ env -u PYTHONPATH "$PYTHON" tools/nix_local.py build .#runtime --out-link result
 env -u PYTHONPATH "$PYTHON" tools/nix_local.py develop
 ```
 
-The helper uses the recorded revisions and limits builds to four jobs and
+The helper selects the recorded release tags and limits builds to four jobs and
 six cores. The same helper accepts `flake check`. No editable Python install
 is required. Outside the shell, `check.py` uses `result-runtime/paths.json`
 to start native probes in the correct Python ABI, while the invoking Python
 runs the plugin-free probe. Source tests add `tools/` through conftest.py.
+
+For offline checks, set `AECO_TOOLCHAIN_ROOT` and `USDAECO_TOOLCHAIN_ROOT`
+to existing checkouts containing the pinned tags, then use:
+
+```sh
+nix flake check --offline --no-write-lock-file \
+  --override-input aeco-toolchain "git+file://$AECO_TOOLCHAIN_ROOT?ref=refs/tags/v0.4.0" \
+  --override-input usdaeco-toolchain "git+file://$USDAECO_TOOLCHAIN_ROOT?ref=refs/tags/v0.3.10"
+```
+
+Offline source resolution still requires cached transitive inputs and build
+dependencies. See [the current build blocker](BLOCKED.md).
+
+`dependencies.json` records the checked forge commits as `revision` and the
+independent public release commits as `publicRevision`. Native provenance
+checks accept either recorded commit; cache receipts always record the
+actual fetched revisions.
 
 The runtime's JSON also gives the installed `fixtures` directory. To inspect
 one of its stages inside the shell:
@@ -80,25 +100,29 @@ Linux uses `.so` libraries.
 
 ## Status
 
-Version 0.1.4 pins usdaeco-toolchain v0.3.9, fixing the builder's Nix package
-version metadata. Family public names remain `github.com/criad-com`.
-All other dependency pins are unchanged.
-Source pytest has **8 passing tests**; the three applicable shared structure
-checks pass with v0.3.9. Native rebuild and receipt regeneration are pending
-review; neither the native build nor `nix flake check` was attempted for this
-update. The prior [blocker record](BLOCKED.md) is retained unchanged.
-The previous gate run against the existing v0.1.2 runtime reported
-**28 checks, 3 failed**:
-the built toolchain revision and both installed plugin versions are stale.
-The other 25 checks pass, including 13 registered classes, 20 validators,
-17 upstream Python tests, the native validator test and plugin-free composition.
-The fixture corpus remains **40 stages / 50 Breps**: 35 stages are error-free;
-five produce 28 errors. Registry and CLI findings agree for all 40 stages.
-These are regression measurements of v0.1.2; native v0.1.4 acceptance is
-**not proven**. The [cache receipt](docs/cache-receipt.json) records the new
-requested toolchain revision and is marked pending; its artifacts and
-publication counts remain historical v0.1.2 evidence.
-See [the verification record](docs/verification.md).
+Version **0.1.5** pins the two published toolchain tags above. Both tags
+were verified on GitHub and the forge; the three external OpenUSD source
+pins and all requirement ranges are unchanged.
+
+Source pytest has **16 passing tests**. Shared structure rules S01, S04,
+S25 and S26 pass with toolchain v0.3.10; the kit's S05 equivalent checks
+family release tags and flake version agreement while retaining the
+external fork URLs.
+
+Native v0.1.5 acceptance is **not proven**: required build dependencies are
+unavailable within the permitted build environment. The single offline
+flake-check attempt evaluated the native outputs and failed on an uncached
+source with local builds disabled. The gate against the existing v0.1.4
+runtime reports **29 checks, 3 failed**: the changed build revisions and
+both installed plugin versions. Its other 26 checks pass, including
+13 classes, 20 validators, 17 upstream Python tests, the native validator
+test, plugin-free composition and the unchanged **40-stage / 50-Brep**
+fixture findings. These are v0.1.4 regression measurements.
+
+The [cache receipt](docs/cache-receipt.json) remains byte-identical evidence
+for v0.1.4: 78 closure paths and three verified artifact hashes. No v0.1.5
+native artifacts have been published. See [the verification record](docs/verification.md)
+and [remaining build work](BLOCKED.md).
 
 The five P2 examples and 66 producer defect fixtures remain absent from the
 pins and not proven. See [the measured deviations](docs/upstream.md#fixture-availability).

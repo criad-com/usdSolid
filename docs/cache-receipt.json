@@ -1,11 +1,11 @@
 {
-  "version": "0.1.4",
+  "version": "0.1.5",
   "revisions": {
-    "aeco-toolchain": "34a29f51a232ac77d5e9f55431e537c426724035",
+    "aeco-toolchain": "71c86d54aa1e4be180a301a089d9a40e727758cb",
     "upstream": "1f6d6d31f1cbeed452b4e1c312bf974d0519d71d",
     "upstream-fixtures": "d618f8ac62cefa02f6765d8e3784ea503195ce86",
     "upstream-validators": "152c37a46c8cb71fbe1363772f1ccffe6e91c78b",
-    "usdaeco-toolchain": "d8f09dfd2ddfb6e8a08a9528e90f949248d5a1c2"
+    "usdaeco-toolchain": "59d3da5ff5114089b54efaaae38efdd7fe1b8e73"
   },
   "pushExitCode": 0,
   "closurePaths": 78,
@@ -13,18 +13,18 @@
   "verification": "Recursive push succeeded; schema, validators and runtime cache StorePath and NarHash match the local build",
   "artifacts": {
     "schema": {
-      "store": "8mnig7f9dq2zkqxkr7rb9bn31nk64f8h-usdSolid-0.1.4",
-      "narHash": "sha256:1x7xfa46p92kml6wbfdg2cdqymn6r3hi307gl2cgqd1s1am955ad",
+      "store": "b9xrcfh9bznv0zbxki6yc8ghdvz7cqc8-usdSolid-0.1.5",
+      "narHash": "sha256:04xapva2yn14hky01i4y2m6pfh5myia9y92wcsc458xis3pj4bif",
       "narSize": 2610320
     },
     "validators": {
-      "store": "d68di0ab3hs5dv0irbzbv36jjl42mp13-usdSolidValidators-0.1.4",
-      "narHash": "sha256:1ahzrl6z1izn1l76l1a1mwmanyb1g81id9wql8bsdr1iqh5hv26l",
+      "store": "hi1x78czcbnjqjdlbf05ifxfl5wnrm8q-usdSolidValidators-0.1.5",
+      "narHash": "sha256:16mllyxhi1q54zhshxmgmh2id8nl6mgdabzcbmnzra8m5y1q7wsh",
       "narSize": 813616
     },
     "runtime": {
-      "store": "j4hw59q4civvfpv385wpm7bnv8nwb929-usdSolid-runtime",
-      "narHash": "sha256:04jcqj9f1ifj2l6p4rkj0sskgzlqlahg43lh6lkq1wy1y9kgm3f0",
+      "store": "jvh8h178bqw5lamwz0bqfgpmllwz0l08-usdSolid-runtime",
+      "narHash": "sha256:11s1h4jp8kq8i1f5gz5vax1ffflv2jz4ly51c5f6swp5nhhknnq5",
       "narSize": 1312
     }
   }
